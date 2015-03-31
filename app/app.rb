@@ -1,8 +1,12 @@
 require 'sinatra/base'
 
 class MarsRovers < Sinatra::Base
+
+  set :views, Proc.new { File.join(root, 'views') }
+  set :public_folder, Proc.new { File.join(root, '..', 'public') }
+
   get '/' do
-    'Hello MarsRovers!'
+    erb :index
   end
 
   # start the server if ruby file executed directly
