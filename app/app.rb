@@ -9,6 +9,10 @@ class MarsRovers < Sinatra::Base
     erb :index
   end
 
+  get '/plateau/create' do
+    
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 end
