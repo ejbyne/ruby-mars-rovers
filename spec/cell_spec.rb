@@ -4,7 +4,7 @@ describe Cell do
 
   let (:cell) { Cell.new }
 
-  it 'is initiated with nil content' do
+  it 'is initialized with nil content' do
     expect(cell.content).to be(nil)
   end
 
