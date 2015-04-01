@@ -2,9 +2,10 @@ require_relative '../app/models/plateau'
 
 describe Plateau do
 
-  let (:cell) { double :cell }
-  let (:cell_class) { double :cell_class, new: cell }
   let (:plateau) { Plateau.new({ coords: '5 5', cell_class: cell_class }) }
+  let (:cell_class) { double :cell_class, new: cell }
+  let (:cell) { double :cell }
+  let (:rover) { double :rover }
 
   it 'contains a grid according to the specified coordinates' do
     expect(plateau.grid.count).to eq(36)
@@ -14,6 +15,12 @@ describe Plateau do
     plateau.grid.each_value do |value|
       expect(value).to eq(cell)
     end
+  end
+
+  it 'enables a rover to be placed on a cell' do
+    coords = :'1 2'
+    expect(plateau.grid[coords]).to receive(:content=).with(rover)
+    plateau.place_rover(coords, rover)
   end
 
 end

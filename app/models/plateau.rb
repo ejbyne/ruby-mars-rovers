@@ -16,4 +16,8 @@ class Plateau
     end.flatten.inject(:merge)
   end
 
+  def place_rover(coords, rover)
+    grid[coords].content = rover
+  end
+
 end
