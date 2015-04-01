@@ -1,0 +1,7 @@
+<h2>Rover in position <%= @position %> successfully selected</h2>
+<h2>Please enter move command</h2>
+<p>Please use the following format: a series of letters (L, R or M) without spaces representing 90 degree left turn, 90 degree right turn, or move forward one cell</p>
+<form id="select-form" action="/select_rover" method="post">
+  Command: <input type="text" name="command">
+  <input type="submit" value="Enter">
+</form>

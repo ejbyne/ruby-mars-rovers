@@ -12,8 +12,8 @@ describe MissionControl do
   end
 
   it 'is able to place and select a rover' do
-    expect(rover_class).to receive(:new).with('N')
-    expect(plateau).to receive(:place_rover).with(rover, :'1 2')
+    expect(rover_class).to receive(:new).with(orientation: 'N')
+    expect(plateau).to receive(:place_rover).with(:'1 2', rover)
     mission_control.select_rover('1 2 N')
   end
 

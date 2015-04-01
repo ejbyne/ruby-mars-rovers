@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require_relative './models/cell'
+require_relative './models/rover'
 require_relative './models/plateau'
+require_relative './models/mission_control'
 
 class MarsRovers < Sinatra::Base
 
@@ -13,8 +15,8 @@ class MarsRovers < Sinatra::Base
   end
 
   post '/plateau' do
-    coords = params[:coords]
-    session[:plateau] = Plateau.new({ coords: coords, cell_class: Cell })
+    session[:plateau] = Plateau.new({ coords: params[:coords], cell_class: Cell })
+    session[:mission_control] = MissionControl.new({ plateau: session[:plateau], rover_class: Rover })
     redirect '/select_rover'
   end
 
@@ -23,11 +25,13 @@ class MarsRovers < Sinatra::Base
   end
 
   post '/select_rover' do
-    command = params[:command]
+    session[:mission_control].select_rover(params[:position])
+    session[:position] = params[:position]
     redirect '/move_rover'
   end
 
   get '/move_rover' do
+    @position = session[:position]
     erb :move_rover
   end
 
