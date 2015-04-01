@@ -17,7 +17,7 @@ describe Plateau do
     end
   end
 
-  it 'enables a rover to be placed on a cell' do
+  it 'allows a rover to be placed on a cell' do
     coords = :'1 2'
     expect(plateau.grid[coords]).to receive(:content=).with(rover)
     plateau.place_rover(coords, rover)
