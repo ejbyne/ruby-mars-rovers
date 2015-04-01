@@ -43,7 +43,7 @@ class MissionControl
     return :"#{x} #{y + 1}" if @rover.orientation == 'N'
     return :"#{x + 1} #{y}" if @rover.orientation == 'E'
     return :"#{x} #{y - 1}" if @rover.orientation == 'S'
-    :"#{x - 1} #{y}" if @rover.orientation == 'W'
+    return :"#{x - 1} #{y}" if @rover.orientation == 'W'
   end
 
   def separate_rover_coords
