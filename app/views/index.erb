@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf8">
-    <title>NASA Mars Mission Control Terminal</title>
-  </head>
-  <body>
-    <header>
-      <h1>NASA Mars Mission Control Terminal<h1>
-    </header>
-    <section>
-      <h2>Please enter the upper-right coordinates of the plateau</h2>
-      <form id="dimensions-form" action="/plateau/create" method="post">
-        Dimensions: <input type="text" name="dimensions">
-        <input type="submit" value="Enter">
-      </form>
-    </section>
-  </body>
-</html>
+<h2>Please enter the upper-right coordinates of the plateau</h2>
+<p>Please use the following format: x coordinate, followed by a space, followed by y coordinate</p>
+<form id="coords-form" action="/plateau" method="post">
+  Coordinates: <input type="text" name="coords">
+  <input type="submit" value="Enter">
+</form>
