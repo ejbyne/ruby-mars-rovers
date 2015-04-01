@@ -40,12 +40,15 @@ class MissionControl
   end
 
   def find_new_rover_coords
-    x = @rover_coords.to_s.split(' ')[0].to_i
-    y = @rover_coords.to_s.split(' ')[1].to_i
+    x, y = separate_rover_coords
     return :"#{x} #{y + 1}" if @rover.orientation == 'N'
     return :"#{x + 1} #{y}" if @rover.orientation == 'E'
     return :"#{x} #{y - 1}" if @rover.orientation == 'S'
     :"#{x - 1} #{y}" if @rover.orientation == 'W'
+  end
+
+  def separate_rover_coords
+    return @rover_coords.to_s.split(' ')[0].to_i, @rover_coords.to_s.split(' ')[1].to_i
   end
 
 end

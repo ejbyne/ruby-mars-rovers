@@ -12,13 +12,13 @@ describe MissionControl do
     expect(mission_control.rover_class).to be(rover_class)
   end
 
-  it 'is able to place and select a rover' do
+  it 'is able to place and select a rover in the specified position' do
     expect(rover_class).to receive(:new).with(orientation: 'N')
     expect(plateau).to receive(:place_rover).with(:'1 2', rover)
     mission_control.select_rover('1 2 N')
   end
 
-  it 'is able to order a rover to turn' do
+  it 'is able to turn a rover in the specified direction' do
     allow(rover_class).to receive(:new).and_return(rover)
     allow(plateau).to receive(:place_rover).with(:'1 2', rover)
     mission_control.select_rover('1 2 N')
@@ -26,7 +26,7 @@ describe MissionControl do
     mission_control.turn_rover('L')
   end
 
-  it 'is able to order a rover to move forward' do
+  it 'is able to move a rover forward one cell in the direction it is facing' do
     allow(rover_class).to receive(:new).and_return(rover)
     allow(plateau).to receive(:place_rover).with(:'1 2', rover)
     mission_control.select_rover('1 2 N')
