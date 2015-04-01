@@ -3,8 +3,8 @@ class Rover
   attr_reader :orientation, :orientation_options, :orientation_index
 
   def initialize(options)
-    @orientation_options = ['N', 'E', 'S', 'W']
     @orientation = options.fetch(:orientation)
+    @orientation_options = ['N', 'E', 'S', 'W']
     @orientation_index = @orientation_options.index(@orientation)
   end
 
