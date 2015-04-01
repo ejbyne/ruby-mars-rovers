@@ -17,4 +17,7 @@ describe MissionControl do
     mission_control.select_rover('1 2 N')
   end
 
+  # it 'is able to move a rover according to the specified command' do
+  # end
+
 end

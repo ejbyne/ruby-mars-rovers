@@ -1,9 +1,17 @@
 class Rover
 
-  attr_reader :orientation
+  attr_reader :orientation, :orientation_options, :orientation_index
 
   def initialize(options)
+    @orientation_options = ['N', 'E', 'S', 'W']
     @orientation = options.fetch(:orientation)
+    @orientation_index = @orientation_options.index(@orientation)
+  end
+
+  def turn(direction)
+    @orientation_options.rotate!(-1) if direction == 'L'
+    @orientation_options.rotate! if direction == 'R'
+    @orientation = @orientation_options[@orientation_index]
   end
 
 end
