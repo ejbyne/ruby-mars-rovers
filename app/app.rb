@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require_relative './models/cell'
-require_relative './models/rover'
 require_relative './models/plateau'
+require_relative './models/rover'
 require_relative './models/mission_control'
 
 class MarsRovers < Sinatra::Base
@@ -35,6 +35,12 @@ class MarsRovers < Sinatra::Base
     erb :move_rover
   end
 
+  post '/move_rover' do
+    session[:mission_control].move_rover(params[:command])
+    puts session[:plateau].grid
+    redirect_to '/select_rover'
+  end
+
   run! if app_file == $0
-  
+
 end
