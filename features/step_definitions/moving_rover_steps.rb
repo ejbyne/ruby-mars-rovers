@@ -13,5 +13,6 @@ Given(/^I have inputted the position of a rover$/) do
 end
 
 When(/^I input a move command for that rover$/) do
-  fill_in('command', :with => 'LMLMLMLMM')
+  fill_in('commands', :with => 'LMLMLMLMM')
+  click_button('Enter')
 end

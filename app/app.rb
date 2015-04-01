@@ -36,9 +36,8 @@ class MarsRovers < Sinatra::Base
   end
 
   post '/move_rover' do
-    session[:mission_control].move_rover(params[:commands])
-    puts session[:plateau].grid
-    redirect_to '/select_rover'
+    session[:mission_control].order_rover(params[:commands])
+    redirect '/select_rover'
   end
 
   run! if app_file == $0
