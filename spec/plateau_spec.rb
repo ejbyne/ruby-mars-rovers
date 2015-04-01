@@ -7,28 +7,36 @@ describe Plateau do
   let (:cell) { double :cell }
   let (:rover) { double :rover }
 
-  it 'contains a grid according to the specified coordinates' do
-    expect(plateau.grid.count).to eq(36)
-  end
+  context 'creating a grid' do
 
-  it 'has a cell for each coordinate' do
-    plateau.grid.each_value do |value|
-      expect(value).to eq(cell)
+    it 'contains a grid according to the specified coordinates' do
+      expect(plateau.grid.count).to eq(36)
     end
+
+    it 'has a cell for each coordinate' do
+      plateau.grid.each_value do |value|
+        expect(value).to eq(cell)
+      end
+    end
+
   end
 
-  it 'allows a rover to be placed on a cell' do
-    coords = :'1 2'
-    expect(plateau.grid[coords]).to receive(:content=).with(rover)
-    plateau.place_rover(coords, rover)
-  end
+  context 'placing and moving rovers on the plateau' do
 
-  it 'allows a rover to be moved to a different cell' do
-    start_coords = :'1 2'
-    end_coords = :'1 3'
-    expect(plateau.grid[start_coords]).to receive(:content=).with(nil)
-    expect(plateau.grid[end_coords]).to receive(:content=).with(rover)
-    plateau.move_rover(start_coords, end_coords, rover)
+    it 'allows a rover to be placed on a cell' do
+      coords = :'1 2'
+      expect(plateau.grid[coords]).to receive(:content=).with(rover)
+      plateau.place_rover(coords, rover)
+    end
+
+    it 'allows a rover to be moved to a different cell' do
+      start_coords = :'1 2'
+      end_coords = :'1 3'
+      expect(plateau.grid[start_coords]).to receive(:content=).with(nil)
+      expect(plateau.grid[end_coords]).to receive(:content=).with(rover)
+      plateau.move_rover(start_coords, end_coords, rover)
+    end
+
   end
 
 end
