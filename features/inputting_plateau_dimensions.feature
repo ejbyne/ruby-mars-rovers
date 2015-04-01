@@ -6,4 +6,4 @@ Feature: Inputting plateau dimensions
   Scenario: Inputting dimensions
     Given I am on the start page
     When I enter the relevant upper-right coordinates
-    Then I should see "Coordinates successfully generated"
+    Then I should see "Coordinates generated"

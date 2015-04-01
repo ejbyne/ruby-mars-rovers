@@ -1,6 +1,6 @@
 class MissionControl
 
-  attr_reader :plateau, :rover_class
+  attr_reader :plateau, :rover_class, :rover_position
 
   def initialize(options)
     @plateau = options.fetch(:plateau)
@@ -8,9 +8,10 @@ class MissionControl
   end
 
   def select_rover(position)
-    orientation = "#{position.split(' ')[2]}"
+    rover_orientation = "#{position.split(' ')[2]}"
     @rover_coords = :"#{position.split(' ')[0]} #{position.split(' ')[1]}"
-    @rover = @rover_class.new(orientation: orientation)
+    @rover_position = position
+    @rover = @rover_class.new(orientation: rover_orientation)
     @plateau.place_rover(@rover_coords, @rover)
   end
 
@@ -29,6 +30,7 @@ class MissionControl
     @new_rover_coords = find_new_rover_coords
     @plateau.move_rover(@rover_coords, @new_rover_coords, @rover)
     @rover_coords = @new_rover_coords
+    @rover_position = "#{@rover_coords} #{@rover.orientation}"
   end
 
   def turn_command?(command)
