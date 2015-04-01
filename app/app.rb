@@ -22,6 +22,15 @@ class MarsRovers < Sinatra::Base
     erb :select_rover
   end
 
+  post '/select_rover' do
+    command = params[:command]
+    redirect '/move_rover'
+  end
+
+  get '/move_rover' do
+    erb :move_rover
+  end
+
   run! if app_file == $0
   
 end
