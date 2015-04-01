@@ -20,4 +20,9 @@ class Plateau
     grid[coords].content = rover
   end
 
+  def move_rover(start_coords, end_coords, rover)
+    grid[start_coords].content = nil
+    grid[end_coords].content = rover
+  end
+
 end

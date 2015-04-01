@@ -23,4 +23,12 @@ describe Plateau do
     plateau.place_rover(coords, rover)
   end
 
+  it 'allows a rover to be moved to a different cell' do
+    start_coords = :'1 2'
+    end_coords = :'1 3'
+    expect(plateau.grid[start_coords]).to receive(:content=).with(nil)
+    expect(plateau.grid[end_coords]).to receive(:content=).with(rover)
+    plateau.move_rover(start_coords, end_coords, rover)
+  end
+
 end
