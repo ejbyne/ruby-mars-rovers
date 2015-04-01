@@ -8,14 +8,12 @@ class MissionControl
   end
 
   def select_rover(position)
-    rover_orientation = "#{position.split(' ')[2]}"
     @rover_coords = :"#{position.split(' ')[0]} #{position.split(' ')[1]}"
-    @rover_position = position
-    @rover = @rover_class.new(orientation: rover_orientation)
+    @rover = @rover_class.new(orientation: "#{position.split(' ')[2]}")
     @plateau.place_rover(@rover_coords, @rover)
   end
 
-  def order_rover(commands)
+  def command_rover(commands)
     commands.chars.each do |command|
       turn_rover(command) if turn_command?(command)
       move_rover if move_command?(command)
@@ -30,7 +28,6 @@ class MissionControl
     @new_rover_coords = find_new_rover_coords
     @plateau.move_rover(@rover_coords, @new_rover_coords, @rover)
     @rover_coords = @new_rover_coords
-    @rover_position = "#{@rover_coords} #{@rover.orientation}"
   end
 
   def turn_command?(command)
@@ -51,6 +48,10 @@ class MissionControl
 
   def separate_rover_coords
     return @rover_coords.to_s.split(' ')[0].to_i, @rover_coords.to_s.split(' ')[1].to_i
+  end
+
+  def rover_position
+    "#{@rover_coords} #{@rover.orientation}"
   end
 
 end

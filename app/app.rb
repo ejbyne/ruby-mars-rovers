@@ -17,8 +17,8 @@ class MarsRovers < Sinatra::Base
   end
 
   post '/plateau' do
-    session[:plateau] = Plateau.new({ coords: params[:coords], cell_class: Cell })
-    session[:mission_control] = MissionControl.new({ plateau: session[:plateau], rover_class: Rover })
+    plateau = Plateau.new({ coords: params[:coords], cell_class: Cell })
+    session[:mission_control] = MissionControl.new({ plateau: plateau, rover_class: Rover })
     flash[:notice] = 'Coordinates generated'
     redirect '/select_rover'
   end
@@ -29,17 +29,16 @@ class MarsRovers < Sinatra::Base
 
   post '/select_rover' do
     session[:mission_control].select_rover(params[:position])
-    session[:position] = params[:position]
     flash[:notice] = "Rover selected in position #{session[:mission_control].rover_position}"
-    redirect '/move_rover'
+    redirect '/command_rover'
   end
 
-  get '/move_rover' do
-    erb :move_rover
+  get '/command_rover' do
+    erb :command_rover
   end
 
-  post '/move_rover' do
-    session[:mission_control].order_rover(params[:commands])
+  post '/command_rover' do
+    session[:mission_control].command_rover(params[:commands])
     flash[:notice] = "Rover moved to position #{session[:mission_control].rover_position}"
     redirect '/select_rover'
   end

@@ -1,6 +1,6 @@
 class Rover
 
-  attr_reader :orientation, :orientation_options, :orientation_index
+  attr_reader :orientation
 
   def initialize(options)
     @orientation = options.fetch(:orientation)

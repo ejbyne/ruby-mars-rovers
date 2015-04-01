@@ -12,13 +12,13 @@ describe MissionControl do
     expect(mission_control.rover_class).to be(rover_class)
   end
 
-  it 'is able to place and select a rover in the specified position' do
+  it 'is able to select a rover in a specified position' do
     expect(rover_class).to receive(:new).with(orientation: 'N')
     expect(plateau).to receive(:place_rover).with(:'1 2', rover)
     mission_control.select_rover('1 2 N')
   end
 
-  it 'is able to turn a rover in the specified direction' do
+  it 'is able to turn a selected rover in a specified direction' do
     allow(rover_class).to receive(:new).and_return(rover)
     allow(plateau).to receive(:place_rover).with(:'1 2', rover)
     mission_control.select_rover('1 2 N')
@@ -26,7 +26,7 @@ describe MissionControl do
     mission_control.turn_rover('L')
   end
 
-  it 'is able to move a rover forward one cell in the direction it is facing' do
+  it 'is able to move a selected rover forward one cell in the direction it is facing' do
     allow(rover_class).to receive(:new).and_return(rover)
     allow(plateau).to receive(:place_rover).with(:'1 2', rover)
     mission_control.select_rover('1 2 N')
@@ -34,13 +34,20 @@ describe MissionControl do
     mission_control.move_rover
   end
 
-  it 'is able to provide a series of orders according to the specified command' do
+  it 'is able to provide a series of commands according to the specified command' do
     allow(rover_class).to receive(:new).and_return(rover)
     allow(plateau).to receive(:place_rover).with(:'1 2', rover)
     mission_control.select_rover('1 2 N')
     expect(rover).to receive(:turn).exactly(4).times
     expect(plateau).to receive(:move_rover).exactly(5).times
-    mission_control.order_rover('LMLMLMLMM')
+    mission_control.command_rover('LMLMLMLMM')
+  end
+
+  it 'is able to return the position of a selected rover' do
+    allow(rover_class).to receive(:new).and_return(rover)
+    allow(plateau).to receive(:place_rover).with(:'1 2', rover)
+    mission_control.select_rover('1 2 N')
+    expect(mission_control.rover_position).to eq('1 2 N')
   end
 
 end

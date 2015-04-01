@@ -11,5 +11,5 @@ Feature: Moving a rover
   Scenario: Moving a rover
     Given I have inputted the plateau dimensions
     And I have inputted the position of a rover
-    When I input a move command for that rover
+    When I input a command for that rover
     Then I should see "Rover moved to position 1 3 N"

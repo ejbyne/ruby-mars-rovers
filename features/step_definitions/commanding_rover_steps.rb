@@ -12,7 +12,7 @@ Given(/^I have inputted the position of a rover$/) do
   step('I input x and y coordinates and an orientation')
 end
 
-When(/^I input a move command for that rover$/) do
+When(/^I input a command for that rover$/) do
   fill_in('commands', :with => 'LMLMLMLMM')
   click_button('Enter')
 end
