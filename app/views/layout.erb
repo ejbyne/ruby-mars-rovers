@@ -4,21 +4,13 @@
     <meta charset="utf8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>NASA Mars Mission Control Terminal</title>
-    <link rel="stylesheet" type="text/css" href="vendor/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/css/stylesheet.css"/>
+    <link rel="stylesheet" type="text/css" href="/vendor/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/css/stylesheet.css"/>
   </head>
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-        <div id="logo">
-          <a href="/">NASA Mars Mission Control Terminal</a>
-        </div>
-      </div>
-    </header>
+    <%= partial :header %>
     <section class="container">
-      <% if flash[:notice] %>
-        <div class="alert alert-success"><%= flash[:notice] %></div>
-      <% end %>
+      <%= partial :flash_messages %>
       <%= yield %>
     </section>
   </body>
