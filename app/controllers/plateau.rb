@@ -2,7 +2,7 @@ class MarsRovers < Sinatra::Base
 
   post '/plateau' do
     begin
-      plateau = Plateau.new({ coords: params[:coords], cell_class: Cell })
+      plateau = Plateau.new({ max_coords: params[:max_coords], cell_class: Cell })
       @@mission_control = MissionControl.new({ plateau: plateau, rover_class: Rover })
       flash[:notice] = 'Coordinates generated'
       redirect '/rover/select'

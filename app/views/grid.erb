@@ -1,0 +1,28 @@
+<table id="grid">
+  <% (0...y_axis_length).reverse_each do |y| %>
+    <tr>
+      <th><%= y %></th>
+      <% grid_rows[y].each do |cell| %>
+        <td>
+          <% if cell.content.is_a?(Rover) %>
+            <% if cell.content.orientation == 'N' %>
+              <span class="glyphicon glyphicon-triangle-top"></span>
+            <% elsif cell.content.orientation == 'E' %>
+              <span class="glyphicon glyphicon-triangle-right"></span>
+            <% elsif cell.content.orientation == 'S' %>
+              <span class="glyphicon glyphicon-triangle-bottom"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-triangle-left"></span>
+            <% end %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  <tr>
+    <th></th>
+    <% (0...x_axis_length).each do |x| %>
+      <th><%= x %></th>
+    <% end %>
+  </tr>
+</table>

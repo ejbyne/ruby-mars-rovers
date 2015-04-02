@@ -3,10 +3,8 @@ class Plateau
   attr_reader :grid
 
   def initialize(options)
-    coords = options.fetch(:coords)
-    cell_class = options.fetch(:cell_class)
-    valid_grid_coords?(coords)
-    @grid = create_grid(coords, cell_class)
+    set_max_coords_if_valid(options.fetch(:max_coords))
+    @grid = create_grid(options.fetch(:cell_class))
   end
 
   def place_rover(coords, rover)
@@ -20,18 +18,31 @@ class Plateau
     grid[end_coords].content = rover
   end
 
-  private
-
-  def create_grid(coords, cell_class)
-    (0..coords.split(' ')[0].to_i).map do |x_coord|
-      (0..coords.split(' ')[1].to_i).map do |y_coord|
-        { "#{x_coord} #{y_coord}".to_sym => cell_class.new }
-      end
-    end.flatten.inject(:merge)
+  def x_axis_length
+    @max_coords.split(' ')[0].to_i + 1
   end
 
-  def valid_grid_coords?(coords)
-    raise 'Invalid coordinates' unless coords =~ /^\d+\s\d+$/
+  def y_axis_length
+    @max_coords.split(' ')[1].to_i + 1
+  end
+
+  def split_grid_values_into_rows
+    grid.values.each_slice(y_axis_length).to_a.transpose
+  end
+
+  private
+
+  def set_max_coords_if_valid(max_coords)
+    raise 'Invalid coordinates' unless max_coords =~ /^\d+\s\d+$/
+    @max_coords = max_coords
+  end
+
+  def create_grid(cell_class)
+    (0...x_axis_length).map do |x|
+      (0...y_axis_length).map do |y|
+        { "#{x} #{y}".to_sym => cell_class.new }
+      end
+    end.flatten.inject(:merge)
   end
 
   def valid_place_coords?(coords)

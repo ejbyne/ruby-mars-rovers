@@ -2,7 +2,7 @@ require_relative '../app/models/plateau'
 
 describe Plateau do
 
-    let(:plateau)    { Plateau.new({ coords: '5 5', cell_class: cell_class }) }
+    let(:plateau)    { Plateau.new({ max_coords: '5 5', cell_class: cell_class }) }
     let(:cell_class) { double :cell_class, new: cell }
     let(:cell)       { double :cell }
     let(:rover)      { double :rover }
@@ -10,8 +10,8 @@ describe Plateau do
   context 'creating a grid' do
 
     it 'does not allow missing or invalid coordinates' do
-      expect{ Plateau.new({ coords: '', cell_class: cell_class }) }.to raise_error('Invalid coordinates')
-      expect{ Plateau.new({ coords: '55', cell_class: cell_class }) }.to raise_error('Invalid coordinates')
+      expect{ Plateau.new({ max_coords: '', cell_class: cell_class }) }.to raise_error('Invalid coordinates')
+      expect{ Plateau.new({ max_coords: '55', cell_class: cell_class }) }.to raise_error('Invalid coordinates')
     end
 
     it 'contains a grid according to the specified coordinates' do
@@ -22,6 +22,15 @@ describe Plateau do
       plateau.grid.each_value do |value|
         expect(value).to eq(cell)
       end
+    end
+
+    it 'knows the lengths of the x and y axes' do
+      expect(plateau.x_axis_length).to eq(6)
+      expect(plateau.y_axis_length).to eq(6)
+    end
+
+    it 'can split the grid values into rows' do
+      expect(plateau.split_grid_values_into_rows.length).to eq(6)
     end
 
   end

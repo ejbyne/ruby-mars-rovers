@@ -1,5 +1,7 @@
 class MissionControl
 
+  attr_reader :plateau
+
   def initialize(options)
     @plateau = options.fetch(:plateau)
     @rover_class = options.fetch(:rover_class)
