@@ -2,10 +2,10 @@ require_relative '../app/models/plateau'
 
 describe Plateau do
 
-    let! (:plateau) { Plateau.new({ coords: '5 5', cell_class: cell_class }) }
-    let! (:cell_class) { double :cell_class, new: cell }
-    let! (:cell) { double :cell }
-    let! (:rover) { double :rover }
+    let(:plateau)    { Plateau.new({ coords: '5 5', cell_class: cell_class }) }
+    let(:cell_class) { double :cell_class, new: cell }
+    let(:cell)       { double :cell }
+    let(:rover)      { double :rover }
 
   context 'creating a grid' do
 

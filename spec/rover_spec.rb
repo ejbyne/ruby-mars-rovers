@@ -2,7 +2,7 @@ require_relative '../app/models/rover'
 
 describe Rover do
 
-  let (:rover) { Rover.new({ orientation: 'N' }) }
+  let(:rover) { Rover.new({ orientation: 'N' }) }
 
   context 'initializing a rover' do
 

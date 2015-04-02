@@ -3,9 +3,9 @@ require_relative '../app/models/mission_control'
 describe MissionControl do
 
   let(:mission_control) { MissionControl.new({ plateau: plateau, rover_class: rover_class }) }
-  let(:plateau) { double :plateau }
-  let(:rover_class) { double :rover_class, new: rover }
-  let(:rover) { double :rover, orientation: 'N' }
+  let(:plateau)         { double :plateau }
+  let(:rover_class)     { double :rover_class, new: rover }
+  let(:rover)           { double :rover, orientation: 'N' }
 
   context 'selecting a rover' do
 
@@ -15,7 +15,7 @@ describe MissionControl do
       expect(mission_control.select_rover('1 2 N')).to eq('1 2 N')
     end
 
-    it 'will raise an error if an invalid position is specified' do
+    it 'does not accept an invalid position' do
       expect{ mission_control.select_rover('') }.to raise_error('Invalid position')
       expect{ mission_control.select_rover('12N') }.to raise_error('Invalid position')
       expect{ mission_control.select_rover('1 2 Z') }.to raise_error('Invalid position')

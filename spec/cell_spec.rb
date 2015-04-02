@@ -2,8 +2,8 @@ require_relative '../app/models/cell'
 
 describe Cell do
 
-  let (:cell) { Cell.new }
-  let (:rover) { double :rover }
+  let(:cell)  { Cell.new }
+  let(:rover) { double :rover }
 
   context 'initializing the cell' do
   
