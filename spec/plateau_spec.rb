@@ -26,13 +26,21 @@ describe Plateau do
 
   end
 
-  context 'placing and moving rovers on the plateau' do
+  context 'placing rovers on the plateau' do
 
     it 'allows a rover to be placed on a cell' do
       coords = :'1 2'
       expect(plateau.grid[coords]).to receive(:content=).with(rover)
       plateau.place_rover(coords, rover)
     end
+
+    it 'raises an error if the selected cell does not exist' do
+      expect{ plateau.place_rover(:'1 6', rover) }.to raise_error('Invalid coordinates')
+    end
+
+  end
+
+  context 'moving rovers on the plateau' do
 
     it 'allows a rover to be moved to a different cell' do
       start_coords = :'1 2'

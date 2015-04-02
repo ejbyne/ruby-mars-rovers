@@ -5,11 +5,12 @@ class Plateau
   def initialize(options)
     coords = options.fetch(:coords)
     cell_class = options.fetch(:cell_class)
-    valid_coords?(coords)
+    valid_grid_coords?(coords)
     @grid = create_grid(coords, cell_class)
   end
 
   def place_rover(coords, rover)
+    valid_rover_coords?(coords)
     grid[coords].content = rover
   end
 
@@ -20,8 +21,12 @@ class Plateau
 
   private
 
-  def valid_coords?(coords)
+  def valid_grid_coords?(coords)
     raise 'Invalid coordinates' unless coords =~ /^\d+\s\d+$/
+  end
+
+  def valid_rover_coords?(coords)
+    raise 'Invalid coordinates' unless @grid.has_key?(coords)
   end
 
   def create_grid(coords, cell_class)
