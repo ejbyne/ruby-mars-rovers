@@ -34,10 +34,6 @@ form {
   margin-bottom: 50px;
 }
 
-#grid {
-  text-align: center;
-}
-
 #grid th {
   height: 40px;
   width: 40px;
@@ -47,7 +43,7 @@ form {
 #grid td {
   height: 40px;
   width: 40px;
-  background-color: #d35400;
+  background-color: #e74c3c;
   border: 1px solid #000;
   text-align: center;
   font-size: 25px;
