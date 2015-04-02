@@ -12,3 +12,8 @@ When(/^I input invalid coordinates$/) do
   fill_in('position', :with => '1 6 N')
   click_button('Enter')
 end
+
+When(/^I try to move the rover outside the grid$/) do
+  fill_in('commands', :with => 'MMMM')
+  click_button('Enter')
+end

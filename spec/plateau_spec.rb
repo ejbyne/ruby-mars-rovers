@@ -50,6 +50,11 @@ describe Plateau do
       plateau.move_rover(start_coords, end_coords, rover)
     end
 
+    it 'raises an error if the rover tries to move outside the plateau' do
+      expect{ plateau.move_rover(:'1 5', :'1 6', rover) }.to raise_error('Cannot ' +
+        'move rover outside plateau. Rover stopped at coordinates 1 5')
+    end
+
   end
 
 end

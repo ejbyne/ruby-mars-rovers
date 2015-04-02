@@ -17,3 +17,9 @@ Scenario: Invalid rover coordinates
   Given I have inputted the plateau dimensions
   When I input invalid coordinates
   Then I should see "Invalid coordinates"
+
+Scenario: Cannot move rover outside grid
+  Given I have inputted the plateau dimensions
+  When I input x and y coordinates and an orientation
+  And I try to move the rover outside the grid
+  Then I should see "Cannot move rover outside plateau. Rover stopped at coordinates 1 5"

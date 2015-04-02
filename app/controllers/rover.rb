@@ -20,9 +20,13 @@ class MarsRovers < Sinatra::Base
   end
 
   post '/rover/command' do
-    session[:mission_control].command_rover(params[:commands])
-    flash[:notice] = "Rover moved to position #{session[:mission_control].rover_position}"
-    redirect '/rover/select'
+    begin
+      session[:mission_control].command_rover(params[:commands])
+      flash[:notice] = "Rover moved to position #{session[:mission_control].rover_position}"
+      redirect '/rover/select'
+    rescue => error_message
+      flash[:error] = "#{error_message}"
+    end
   end
 
 end
