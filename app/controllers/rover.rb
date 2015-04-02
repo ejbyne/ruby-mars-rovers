@@ -6,8 +6,8 @@ class MarsRovers < Sinatra::Base
 
   post '/rover/select' do
     begin
-      session[:mission_control].select_rover(params[:position])
-      flash[:notice] = "Rover selected in position #{session[:mission_control].rover_position}"
+      rover_position = session[:mission_control].select_rover(params[:position])
+      flash[:notice] = "Rover selected in position #{rover_position}"
       redirect '/rover/command'
     rescue => error_message
       flash[:error] = "#{error_message}"
@@ -21,8 +21,8 @@ class MarsRovers < Sinatra::Base
 
   post '/rover/command' do
     begin
-      session[:mission_control].command_rover(params[:commands])
-      flash[:notice] = "Rover moved to position #{session[:mission_control].rover_position}"
+      rover_position = session[:mission_control].command_rover(params[:commands])
+      flash[:notice] = "Rover moved to position #{rover_position}"
       redirect '/rover/select'
     rescue => error_message
       flash[:error] = "#{error_message}"

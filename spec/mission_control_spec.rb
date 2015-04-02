@@ -12,7 +12,7 @@ describe MissionControl do
     it 'is able to select a rover in a specified position' do
       expect(rover_class).to receive(:new).with(orientation: 'N')
       expect(plateau).to receive(:place_rover).with(:'1 2', rover)
-      mission_control.select_rover('1 2 N')
+      expect(mission_control.select_rover('1 2 N')).to eq('1 2 N')
     end
 
     it 'will raise an error if an invalid position is specified' do
@@ -33,12 +33,13 @@ describe MissionControl do
 
     it 'is able to turn a selected rover in a specified direction' do
       expect(rover).to receive(:turn).with('L')
-      mission_control.command_rover('L')
+      allow(rover).to receive(:orientation).and_return('W')
+      expect(mission_control.command_rover('L')).to eq('1 2 W')
     end
 
     it 'is able to move a selected rover forward one cell in the direction it is facing' do
       expect(plateau).to receive(:move_rover).with(:'1 2', :'1 3', rover)
-      mission_control.command_rover('M')
+      expect(mission_control.command_rover('M')).to eq('1 3 N')
     end
 
     it 'is able to provide a series of commands' do
@@ -50,10 +51,6 @@ describe MissionControl do
     it 'does accept an invalid command' do
       expect{ mission_control.command_rover('') }.to raise_error('Invalid command')
       expect{ mission_control.command_rover('Z') }.to raise_error('Invalid command')
-    end
-
-    it 'is able to return the position of a selected rover' do
-      expect(mission_control.rover_position).to eq('1 2 N')
     end
 
   end
