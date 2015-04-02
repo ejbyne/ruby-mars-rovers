@@ -5,6 +5,7 @@ class Plateau
   def initialize(options)
     coords = options.fetch(:coords)
     cell_class = options.fetch(:cell_class)
+    valid_coords?(coords)
     @grid = create_grid(coords, cell_class)
   end
 
@@ -18,7 +19,11 @@ class Plateau
   end
 
   private
-    
+
+  def valid_coords?(coords)
+    raise 'Invalid coordinates' unless coords =~ /^\d+\s\d+$/
+  end
+
   def create_grid(coords, cell_class)
     (0..coords.split(' ')[0].to_i).map do |x_coord|
       (0..coords.split(' ')[1].to_i).map do |y_coord|

@@ -9,6 +9,11 @@ describe Plateau do
 
   context 'creating a grid' do
 
+    it 'does not allow missing or invalid coordinates' do
+      expect{ Plateau.new({ coords: '', cell_class: cell_class }) }.to raise_error('Invalid coordinates')
+      expect{ Plateau.new({ coords: '55', cell_class: cell_class }) }.to raise_error('Invalid coordinates')
+    end
+
     it 'contains a grid according to the specified coordinates' do
       expect(plateau.grid.count).to eq(36)
     end
