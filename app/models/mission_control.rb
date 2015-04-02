@@ -8,6 +8,7 @@ class MissionControl
   end
 
   def select_rover(position)
+    valid_position?(position)
     @rover_coords = :"#{position.split(' ')[0]} #{position.split(' ')[1]}"
     @rover = @rover_class.new(orientation: "#{position.split(' ')[2]}")
     @plateau.place_rover(@rover_coords, @rover)
@@ -25,6 +26,10 @@ class MissionControl
   end
 
   private
+
+  def valid_position?(position)
+    raise 'Invalid position' unless position =~ /^\d+\s\d+\s[NESW]$/
+  end
 
   def turn_rover(command)
     @rover.turn(command)

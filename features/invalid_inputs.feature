@@ -8,7 +8,12 @@ Scenario: Invalid grid dimensions
   When I enter invalid upper-right coordinates
   Then I should see "Invalid coordinates"
 
-Scenario: Invalid rover selection
+Scenario: Invalid rover position
   Given I have inputted the plateau dimensions
   When I input an invalid position
   Then I should see "Invalid position"
+
+Scenario: Invalid rover coordinates
+  Given I have inputted the plateau dimensions
+  When I input invalid coordinates
+  Then I should see "Invalid coordinates"

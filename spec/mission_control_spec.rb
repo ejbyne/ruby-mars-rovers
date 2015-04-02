@@ -15,6 +15,12 @@ describe MissionControl do
       mission_control.select_rover('1 2 N')
     end
 
+    it 'will raise an error if an invalid position is specified' do
+      expect{ mission_control.select_rover('') }.to raise_error('Invalid position')
+      expect{ mission_control.select_rover('12N') }.to raise_error('Invalid position')
+      expect{ mission_control.select_rover('1 2 Z') }.to raise_error('Invalid position')
+    end
+
   end
 
   context 'commanding a rover' do
