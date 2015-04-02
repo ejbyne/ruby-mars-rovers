@@ -2,10 +2,10 @@ require_relative '../app/models/plateau'
 
 describe Plateau do
 
-  let (:plateau) { Plateau.new({ coords: '5 5', cell_class: cell_class }) }
-  let (:cell_class) { double :cell_class, new: cell }
-  let (:cell) { double :cell }
-  let (:rover) { double :rover }
+    let! (:plateau) { Plateau.new({ coords: '5 5', cell_class: cell_class }) }
+    let! (:cell_class) { double :cell_class, new: cell }
+    let! (:cell) { double :cell }
+    let! (:rover) { double :rover }
 
   context 'creating a grid' do
 
@@ -45,6 +45,7 @@ describe Plateau do
     it 'allows a rover to be moved to a different cell' do
       start_coords = :'1 2'
       end_coords = :'1 3'
+      expect(plateau.grid[end_coords]).to receive(:content)
       expect(plateau.grid[start_coords]).to receive(:content=).with(nil)
       expect(plateau.grid[end_coords]).to receive(:content=).with(rover)
       plateau.move_rover(start_coords, end_coords, rover)
@@ -53,6 +54,13 @@ describe Plateau do
     it 'raises an error if the rover tries to move outside the plateau' do
       expect{ plateau.move_rover(:'1 5', :'1 6', rover) }.to raise_error('Cannot ' +
         'move rover outside plateau. Rover stopped at coordinates 1 5')
+    end
+
+    it 'raises an error if the rover tries to move onto a cell occupied by another rover' do
+      end_coords = :'1 3'
+      allow(plateau.grid[end_coords]).to receive(:content).and_return(rover)
+      expect{ plateau.move_rover(:'1 2', end_coords, rover) }.to raise_error('Cannot move ' +
+        'rover onto cell occupied by another rover. Rover stopped at coordinates 1 2')
     end
 
   end

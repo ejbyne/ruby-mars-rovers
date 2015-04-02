@@ -35,12 +35,14 @@ class Plateau
   end
 
   def valid_place_coords?(coords)
-    raise 'Invalid coordinates' unless @grid.has_key?(coords)
+    raise 'Invalid coordinates' unless grid.has_key?(coords)
   end
 
   def valid_move_coords?(start_coords, end_coords)
     raise "Cannot move rover outside plateau. Rover stopped at coordinates " +
-     "#{start_coords}" unless @grid.has_key?(end_coords)
+     "#{start_coords}" unless grid.has_key?(end_coords)
+    raise "Cannot move rover onto cell occupied by another rover. Rover stopped " +
+    "at coordinates #{start_coords}" unless grid[end_coords].content == nil
   end
 
 end

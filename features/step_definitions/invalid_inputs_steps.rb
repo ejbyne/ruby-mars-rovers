@@ -22,3 +22,11 @@ When(/^I input an invalid command$/) do
   fill_in('commands', :with => 'LRMZ')
   click_button('Enter')
 end
+
+When(/^I input the position of another rover$/) do
+  step('I input the position of a rover')
+end
+
+When(/^I try to move that rover onto the same cell as the first rover$/) do
+  step('I input a command for that rover')
+end

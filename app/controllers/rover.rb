@@ -26,6 +26,7 @@ class MarsRovers < Sinatra::Base
       redirect '/rover/select'
     rescue => error_message
       flash[:error] = "#{error_message}"
+      redirect '/rover/select'
     end
   end
 
