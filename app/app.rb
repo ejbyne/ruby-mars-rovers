@@ -13,6 +13,7 @@ class MarsRovers < Sinatra::Base
 
   register Sinatra::Partial
   use Rack::Flash
+  enable :sessions
   set :partial_template_engine, :erb
   set :views, Proc.new { File.join(root, '..', 'views') }
   set :public_folder, Proc.new { File.join(root, '..', '..', 'public') }
