@@ -18,6 +18,12 @@ Scenario: Invalid rover coordinates
   When I input invalid coordinates
   Then I should see "Invalid coordinates"
 
+Scenario: Invalid move command
+  Given I have inputted the plateau dimensions
+  When I input x and y coordinates and an orientation
+  And I input an invalid command
+  Then I should see "Invalid command"
+
 Scenario: Cannot move rover outside grid
   Given I have inputted the plateau dimensions
   When I input x and y coordinates and an orientation

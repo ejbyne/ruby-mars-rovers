@@ -15,6 +15,7 @@ class MissionControl
   end
 
   def command_rover(commands)
+    valid_commands?(commands)
     commands.chars.each do |command|
       turn_rover(command) if turn_command?(command)
       move_rover if move_command?(command)
@@ -29,6 +30,10 @@ class MissionControl
 
   def valid_position?(position)
     raise 'Invalid position' unless position =~ /^\d+\s\d+\s[NESW]$/
+  end
+
+  def valid_commands?(commands)
+    raise 'Invalid command' unless commands =~ /^[LRM]+$/
   end
 
   def turn_rover(command)

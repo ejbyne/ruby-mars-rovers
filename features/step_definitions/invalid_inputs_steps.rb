@@ -17,3 +17,8 @@ When(/^I try to move the rover outside the grid$/) do
   fill_in('commands', :with => 'MMMM')
   click_button('Enter')
 end
+
+When(/^I input an invalid command$/) do
+  fill_in('commands', :with => 'LRMZ')
+  click_button('Enter')
+end

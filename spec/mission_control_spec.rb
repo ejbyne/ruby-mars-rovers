@@ -47,6 +47,11 @@ describe MissionControl do
       mission_control.command_rover('LMLMLMLMM')
     end
 
+    it 'does accept an invalid command' do
+      expect{ mission_control.command_rover('') }.to raise_error('Invalid command')
+      expect{ mission_control.command_rover('Z') }.to raise_error('Invalid command')
+    end
+
     it 'is able to return the position of a selected rover' do
       expect(mission_control.rover_position).to eq('1 2 N')
     end
