@@ -16,7 +16,6 @@ class MarsRovers < Sinatra::Base
   set :partial_template_engine, :erb
   set :views, Proc.new { File.join(root, '..', 'views') }
   set :public_folder, Proc.new { File.join(root, '..', '..', 'public') }
-  enable :sessions
 
   run! if app_file == $0
 
