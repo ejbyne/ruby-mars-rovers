@@ -1,4 +1,4 @@
-# Mars Rovers Application (Ruby)
+# Mars Rovers (Ruby)
 
 ## Summary
 
@@ -37,8 +37,8 @@ I have made the following assumptions:
 
 Once you have copied this directory onto your machine, please change into that directory and install the application's dependencies:
 ```
-$cd mars-rovers
-$bundle install
+$ cd mars-rovers
+$ bundle install
 ```
 
 ### Run the application
